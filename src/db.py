@@ -53,5 +53,32 @@ def init_db():
     conn.close()
     print(f"Database initialized at {DB_PATH}")
 
+DEFAULT_CATEGORIES = [
+    ("Food & Dining", "expense"),
+    ("Transport", "expense"),
+    ("Shopping", "expense"),
+    ("Rent", "expense"),
+    ("Utilities", "expense"),
+    ("Entertainment", "expense"),
+    ("Health", "expense"),
+    ("Groceries", "expense"),
+    ("Salary", "income"),
+    ("Other Income", "income"),
+    ("Uncategorized", "expense"),
+]
+
+def seed_categories():
+    conn = get_connection()
+    cur = conn.cursor()
+    for name, type_ in DEFAULT_CATEGORIES:
+        cur.execute(
+            "INSERT OR IGNORE INTO categories (name, type) VALUES (?, ?)",
+            (name, type_)
+        )
+    conn.commit()
+    conn.close()
+    print(f"Seeded {len(DEFAULT_CATEGORIES)} categories")
+    
 if __name__ == "__main__":
     init_db()
+    seed_categories()
