@@ -1,0 +1,14 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Your actual personal data - NEVER commit this
+data/finance.db
+raw_statements/*.csv
+!raw_statements/sample.csv
+
+# Environment variables (API keys, later phases)
+.env
